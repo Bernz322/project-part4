@@ -1,0 +1,20 @@
+button {
+    min-width: 150px;
+    border-radius: 10px;
+    margin: 30px 0;
+    padding: 5px 0;
+}
+
+.loader {
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,0 +1,47 @@
+.container {
+    h3 {
+        text-align: left;
+        padding: 0 0 0 15px;
+        margin-bottom: 15px;
+
+        span {
+            font-weight: 400;
+        }
+    }
+
+    .sharedHeader {
+        margin: 25px 0;
+    }
+
+    .sharingContainer {
+        border: 2px solid black;
+        border-radius: 5px;
+        padding: 25px 25px 25px 50px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        /* Editing Select dropdown using an image */
+        .shareUser {
+            text-overflow: "";
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: transparent url("../assets/dropdown.PNG") no-repeat 270px center;
+            margin-right: 25px;
+        }
+
+        label {
+            font-weight: 700;
+            margin-right: 15px;
+        }
+
+        select {
+            text-align: center;
+            height: 34px;
+            width: 300px;
+            border: 2px solid black;
+            border-radius: 5px;
+        }
+    }
+}

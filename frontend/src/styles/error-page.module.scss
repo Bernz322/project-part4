@@ -1,0 +1,22 @@
+.errorPage {
+    display: flex;
+    align-items: center;
+    flex-flow: nowrap column;
+    min-height: 100vh;
+
+    h1 {
+        color: rgb(255, 66, 66);
+        font-size: 8rem;
+        margin: 45px auto;
+    }
+
+    p {
+        font-weight: 500;
+        font-size: 2rem;
+    }
+
+    .error {
+        color: rgb(255, 66, 66);
+        margin-bottom: 50px;
+    }
+}
