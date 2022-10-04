@@ -38,7 +38,7 @@ function App() {
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <ToastContainer
-        position="top-right"
+        position="top-center"
         autoClose={3000}
         closeButton={false}
       />

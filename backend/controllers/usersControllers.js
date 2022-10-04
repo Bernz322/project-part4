@@ -51,9 +51,10 @@ const updateUserById = async (req, res) => {
         database.collection("users").findOne({ email }, (err, data) => {
             if (err) throw err;
             if (data && data._id != id) {
-                res.status(404).json({ message: "User email already exists!" });
+                res.status(409).json({ message: "User email already exists!" });
             } else {
-                database.collection("users").updateOne({ _id: o_id }, { $set: user }, (err, data) => {
+                database.collection("users").findOneAndUpdate({ _id: o_id }, { $set: user }, { returnOriginal: false }, (err, data) => {
+                    console.log(data);
                     if (err) {
                         res.status(400).json({ message: `Error updating user! : ${err}` });
                     } else {

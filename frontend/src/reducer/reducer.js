@@ -17,8 +17,6 @@ const reducer = (state, action) => {
             return { ...state, loading: false, success: false, error: action.payload };
         case ACTION_TYPE.LOGOUT:
             deleteCookie('accessToken', '/', 'localhost');
-            localStorage.removeItem("loggedUser");
-            window.location.href = "/logout";
             return { loggedUser: [] };
         case ACTION_TYPE.REQUEST_START:
             return { ...state, loading: true, success: false, error: "" };

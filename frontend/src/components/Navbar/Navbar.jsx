@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { NavLink, useLocation } from "react-router-dom";
 import { DataContext } from '../../context/Context';
-import { ACTION_TYPE } from '../../reducer/actionTypes';
+import { Logout } from '../../reducer/actions';
 import "./navbar.scss";
 
 const Navbar = () => {
@@ -10,7 +10,7 @@ const Navbar = () => {
     const path = location.pathname.split("/")[1];
 
     const handleLogout = () => {
-        dispatch({ type: ACTION_TYPE.LOGOUT });
+        dispatch(Logout());
     };
 
     return (

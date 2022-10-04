@@ -148,11 +148,60 @@ export const fetchUploadById = async (id) => {
     return res;
 };
 
-// Get upload by id
-// Edit uploads
-// Delete uploads
-// Add uploads
-// Add share
-// Remove share
+export const addUpload = async (form) => {
+    const res = await apiRequest(`/uploads`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: form
+    });
+    return res;
+};
+
+export const editUploadById = async ({ id, label }) => {
+    const res = await apiRequest(`/uploads/single/edit/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: { label }
+    });
+    return res;
+};
+
+export const deleteUploadById = async (id) => {
+    const res = await apiRequest(`/uploads/single/delete/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+    return res;
+};
+
+export const shareUploadToUser = async ({ uploadId, userId }) => {
+    const res = await apiRequest(`/uploads/single/share/${uploadId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: { toShareId: userId }
+    });
+
+    return res;
+};
+
+export const unshareUploadToUser = async ({ uploadId, userId }) => {
+    const res = await apiRequest(`/uploads/single/remove/${uploadId}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: { toRemoveId: userId }
+    });
+    return res;
+};
+
 // Socket io
 

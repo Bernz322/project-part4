@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Navbar, Table } from '../components';
+import { Table } from '../components';
 import { DataContext } from '../context/Context';
-import { ACTION_TYPE } from '../reducer/actionTypes';
+import { RequestError, RequestStart, RequestSuccess } from '../reducer/actions';
 import classes from '../styles/users-list.module.scss';
 import { fetchUsers } from '../utils/api';
 
@@ -23,13 +23,13 @@ const UsersList = () => {
 
     useEffect(() => {
         const fetch = async () => {
-            dispatch({ type: ACTION_TYPE.REQUEST_START });
+            dispatch(RequestStart());
             try {
                 const res = await fetchUsers();
                 setUsers(res);
-                dispatch({ type: ACTION_TYPE.REQUEST_SUCCESS });
+                dispatch(RequestSuccess());
             } catch (error) {
-                dispatch({ type: ACTION_TYPE.REQUEST_ERROR });
+                dispatch(RequestError());
                 toast.error(error.response.data.message);
             }
         };
@@ -37,13 +37,10 @@ const UsersList = () => {
     }, [dispatch, fetchAgain]);
 
     return (
-        <>
-            <Navbar />
-            <div className={classes.container}>
-                <h3>Users</h3>
-                <Table data={users} column={tableColumn} tableName="users" />
-            </div>
-        </>
+        <div className={classes.container}>
+            <h3>Users</h3>
+            <Table data={users} column={tableColumn} tableName="users" />
+        </div>
     );
 };
 

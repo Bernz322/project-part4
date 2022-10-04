@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button } from '../components';
 import { DataContext } from '../context/Context';
-import { ACTION_TYPE } from '../reducer/actionTypes';
-import classes from "../styles/login.module.scss";
+import { RegisterError, RegisterStart, RegisterSuccess } from '../reducer/actions';
 import { register } from '../utils/api';
 import { validateEmail } from '../utils/utils';
+import classes from "../styles/login.module.scss";
 
 const Register = () => {
     const { dispatch, loading } = useContext(DataContext);
@@ -32,13 +32,13 @@ const Register = () => {
             password: password.current.value
         };
 
-        dispatch({ type: ACTION_TYPE.REGISTER_START });
+        dispatch(RegisterStart());
         try {
             await register(registerDetails);
-            dispatch({ type: ACTION_TYPE.REGISTER_SUCCESS });
+            dispatch(RegisterSuccess());
             navigate('/register-success', { replace: true });
         } catch (error) {
-            dispatch({ type: ACTION_TYPE.REGISTER_ERROR });
+            dispatch(RegisterError());
             toast.error(error.response.data.message);
         }
 
@@ -65,7 +65,7 @@ const Register = () => {
                     <input type="password" name="confirm-password" id="confirm-password"
                         placeholder="******" ref={confirmPassword} />
                 </div>
-                <Button text="Register" type="cyan" bold loading={loading} />
+                <Button text="Register" variant="cyan" bold loading={loading} />
             </form>
         </div>);
 };

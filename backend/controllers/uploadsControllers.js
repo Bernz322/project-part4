@@ -145,14 +145,16 @@ const removeUploadToUser = async (req, res) => {
     mongoClient.connect(process.env.MONGODB_URL, (err, db) => {
         if (err) throw err;
         let database = db.db(process.env.DB_NAME);
-        database.collection("uploads").updateOne({ _id: o_id }, { $pull: { 'sharedTo': o_idToRemove } }, (err, data) => {
+        database.collection("uploads").findOneAndUpdate({ _id: o_id }, { $pull: { 'sharedTo': o_idToRemove } }, { returnOriginal: false }, (err, data) => {
+            console.log(data);
             if (err) {
                 res.status(400).json({ message: `Error removing shared upload to that user! : ${err}` });
             } else {
                 if (data.matchedCount === 0) {
                     res.status(200).json({ message: "Upload doesn't exist." });
                 } else {
-                    res.status(200).json({ message: "Upload has been removed to that user successfully." });
+                    // res.status(200).json({ message: "Upload has been removed to that user successfully." });
+                    res.status(200).json(data);
                 }
             }
         });

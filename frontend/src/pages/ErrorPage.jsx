@@ -11,7 +11,7 @@ export default function ErrorPage() {
                 <i>Page not found</i>
             </p>
             <Link to="/">
-                <Button text="Click here to return to home page" unstyled type="cyan" bold />
+                <Button text="Click here to return to home page" type="unstyled" variant="cyan" bold />
             </Link>
         </div>
     );

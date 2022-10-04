@@ -50,6 +50,8 @@ export const deleteCookie = (cookieName, path, domain) => {
             ((domain) ? ";domain=" + domain : "") +
             ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
     }
+    localStorage.removeItem("loggedUser");
+    window.location.href = "/logout";
 };
 
 export const getCurrentLoggedUser = () => {

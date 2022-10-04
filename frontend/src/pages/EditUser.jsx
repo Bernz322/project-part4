@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { Button, Navbar } from '../components';
+import { Button } from '../components';
 import { DataContext } from '../context/Context';
-import { ACTION_TYPE } from '../reducer/actionTypes';
+import { RequestError, RequestStart, RequestSuccess } from '../reducer/actions';
 import { editUserById, fetchUserById } from '../utils/api';
 import { validateEmail } from '../utils/utils';
 
@@ -16,14 +16,14 @@ const EditUser = () => {
 
     useEffect(() => {
         const fetch = async () => {
-            dispatch({ type: ACTION_TYPE.REQUEST_START });
+            dispatch(RequestStart());
             try {
                 const res = await fetchUserById(id);
                 setName(res[0].name);
                 setEmail(res[0].email);
-                dispatch({ type: ACTION_TYPE.REQUEST_SUCCESS });
+                dispatch(RequestSuccess());
             } catch (error) {
-                dispatch({ type: ACTION_TYPE.REQUEST_ERROR });
+                dispatch(RequestError());
                 toast.error(error.response.data.message);
             }
         };
@@ -43,35 +43,32 @@ const EditUser = () => {
             email: email.trim(),
         };
 
-        dispatch({ type: ACTION_TYPE.REQUEST_START });
+        dispatch(RequestStart());
         try {
             await editUserById(userDetails);
-            dispatch({ type: ACTION_TYPE.REQUEST_SUCCESS });
+            dispatch(RequestSuccess());
             navigate('/users-list', { replace: true });
         } catch (error) {
-            dispatch({ type: ACTION_TYPE.REQUEST_ERROR });
+            dispatch(RequestError());
             toast.error(error.response.data.message);
         }
     };
 
     return (
-        <>
-            <Navbar />
-            <div className="container">
-                <h3>Edit User Information</h3>
-                <form className="global-form" onSubmit={handleEditUser}>
-                    <div>
-                        <label htmlFor="full-name">Full Name</label>
-                        <input value={name} type="text" name="full-name" id="full-name" placeholder="Anne Hunter" onChange={(e) => setName(e.target.value)} />
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email</label>
-                        <input value={email} type="text" name="email" id="email" placeholder="anne.hunter@mail.com" onChange={(e) => setEmail(e.target.value)} />
-                    </div>
-                    <Button text="Save" type="cyan" bold loading={loading} />
-                </form>
-            </div>
-        </>
+        <div className="container">
+            <h3>Edit User Information</h3>
+            <form className="global-form" onSubmit={handleEditUser}>
+                <div>
+                    <label htmlFor="full-name">Full Name</label>
+                    <input value={name} type="text" name="full-name" id="full-name" placeholder="Anne Hunter" onChange={(e) => setName(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input value={email} type="text" name="email" id="email" placeholder="anne.hunter@mail.com" onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <Button text="Save" variant="cyan" bold loading={loading} />
+            </form>
+        </div>
     );
 };
 
