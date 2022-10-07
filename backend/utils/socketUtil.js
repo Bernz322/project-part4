@@ -10,6 +10,9 @@ exports.sio = server => {
 exports.connection = io => {
     io.on('connection', socket => { // When a user connects
         // When a user sends a message, send message back to frontend
+
+        // setup
+
         socket.on("send_message", (message) => {
             socket.broadcast.emit("receive_message", message);
         });

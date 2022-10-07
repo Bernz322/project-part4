@@ -27,8 +27,8 @@ const Login = () => {
         dispatch(LoginStart());
         try {
             const res = await login(loginDetails);
-            dispatch(LoginSuccess({ id: res._id }));
             setCookie("accessToken", res.token, 1);
+            dispatch(LoginSuccess({ id: res._id }));
         } catch (error) {
             dispatch(LoginError());
             toast.error(error.response.data.message);

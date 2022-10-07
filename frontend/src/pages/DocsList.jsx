@@ -7,10 +7,9 @@ import classes from '../styles/docs-list.module.scss';
 import { fetchUploads, fetchUserUploads } from '../utils/api';
 
 const DocList = () => {
-    const { dispatch, fetchAgain } = useContext(DataContext);
+    const { loggedUser, dispatch, fetchAgain } = useContext(DataContext);
     const [userUploads, setUserUploads] = useState([]);
     const [allUploads, setAllUploads] = useState([]);
-    const { id } = JSON.parse(localStorage.getItem("loggedUser"));
 
     const tableColumnUploads = [
         {
@@ -37,7 +36,7 @@ const DocList = () => {
     ];
 
     let sharedToUser = allUploads.filter(upload => {
-        return upload.sharedTo.find(item => item._id === id);
+        return upload.sharedTo.find(item => item._id === loggedUser.id);
     });
 
     useEffect(() => {

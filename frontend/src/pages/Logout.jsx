@@ -1,9 +1,15 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components';
 import classes from "../styles/login.module.scss";
 
 const Logout = () => {
+    useEffect(() => {
+        setTimeout(() => {
+            localStorage.removeItem("loggedUser");
+        }, 0);
+    }, []);
     return (
         <div className={classes.container}>
             <h3>Welcome to Users Module</h3>

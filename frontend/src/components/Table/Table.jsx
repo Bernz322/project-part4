@@ -12,6 +12,8 @@ const Table = ({ data, column, tableName }) => {
     const [deleteModalShow, setDeleteModalShow] = useState(false);
     const [editModalShow, setEditModalShow] = useState(false);
     const [addModalShow, setAddModalShow] = useState(false);
+    const skeletonBaseColor = "#cccccc";
+    const skeletonHighlightColor = "#f5f5f5";
 
     const handleDeleteModal = (item, type) => {
         // To get row data and open delete modal
@@ -35,7 +37,7 @@ const Table = ({ data, column, tableName }) => {
     return (
         <div className={classes.relative}>
             {loading ?
-                <Skeleton height={300} baseColor="#cccccc" highlightColor="#f5f5f5" />
+                <Skeleton height={300} baseColor={skeletonBaseColor} highlightColor={skeletonHighlightColor} />  // put colors inside a variable
                 :
                 <table className={classes.globalTable}>
                     <thead>

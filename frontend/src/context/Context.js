@@ -15,7 +15,7 @@ export default function Context({ children }) {
     const [fetchAgain, setFetchAgain] = useState(false);
 
     useEffect(() => {
-        localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser) || []);
+        localStorage.setItem("loggedUser", JSON.stringify(state.loggedUser) || {});
     }, [state.loggedUser]);
 
     const contextValues = {

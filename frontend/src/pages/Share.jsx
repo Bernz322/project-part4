@@ -8,12 +8,11 @@ import classes from "../styles/share.module.scss";
 import { fetchUploadById, fetchUsers, shareUploadToUser } from '../utils/api';
 
 const Share = () => {
-    const { dispatch, fetchAgain, setFetchAgain, loading } = useContext(DataContext);
+    const { loggedUser, dispatch, fetchAgain, setFetchAgain, loading } = useContext(DataContext);
     const [upload, setUpload] = useState([]);
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState("");
     const currentUpload = useParams();
-    const loggedUser = JSON.parse(localStorage.getItem("loggedUser"));
 
     const tableColumnShared = [
         {

@@ -28,7 +28,6 @@ export const login = async ({ email, password }) => {
         },
         data: { email, password }
     });
-
     return res;
 };
 
@@ -202,6 +201,3 @@ export const unshareUploadToUser = async ({ uploadId, userId }) => {
     });
     return res;
 };
-
-// Socket io
-

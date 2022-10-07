@@ -3,9 +3,9 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { Navbar } from '../components';
 
 
-const PrivateRoutes = ({ token }) => {
+const PrivateRoutes = ({ token, setToken }) => {
     return (
-        token ? <><Navbar /> <Outlet /></> : <Navigate to='/' replace />
+        token ? <><Navbar setToken={setToken} /> <Outlet /></> : <Navigate to='/' replace />
     );
 };
 

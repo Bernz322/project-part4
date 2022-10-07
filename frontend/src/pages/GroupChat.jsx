@@ -9,7 +9,7 @@ import { fetchMessages, fetchLoggedInUser, sendMessage } from '../utils/api';
 import { accessTokenChecker, getMessageDate } from '../utils/utils';
 import { RequestError, RequestStart, RequestSuccess } from '../reducer/actions';
 
-var socket;
+let socket;
 
 const GroupChat = () => {
     const { dispatch, loading } = useContext(DataContext);
@@ -23,7 +23,7 @@ const GroupChat = () => {
         // useEffect for creating socket implementation
         socket = io("http://localhost:5000", {
             extraHeaders: {
-                auuth_token: accessTokenChecker("accessToken")
+                auth_token: accessTokenChecker("accessToken")
             }
         });
         socket.on("receive_message", (message) => {
@@ -60,7 +60,7 @@ const GroupChat = () => {
         if (message.trim() === "") return toast.warn("Message is required");
         const messageData = {
             user_id: user._id,
-            message: message,
+            message,
             time: date
         };
         dispatch(RequestStart());

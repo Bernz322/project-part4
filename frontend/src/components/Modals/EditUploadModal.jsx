@@ -3,16 +3,16 @@ import { toast } from 'react-toastify';
 import { Modal } from 'react-bootstrap/';
 import { Button } from '../';
 import { DataContext } from '../../context/Context';
-import "./modal.scss";
 import { editUploadById } from '../../utils/api';
 import { RequestError, RequestStart, RequestSuccess } from '../../reducer/actions';
+import "./modal.scss";
 
 const EditUploadModal = (props) => {
     const { dispatch, loading, fetchAgain, setFetchAgain } = useContext(DataContext);
     const [label, setLabel] = useState("");
 
     const handleEditUpload = async () => {
-        if (label.trim() === "") { return toast.warn("Description is required, if you wish to not do any changes, click cancel."); }
+        if (label.trim() === "" || label.trim() === props.data.label) { return toast.warn("Description is required, if you wish to not do any changes, click cancel."); }
 
         dispatch(RequestStart());
         const data = {

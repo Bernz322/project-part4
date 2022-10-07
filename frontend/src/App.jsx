@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.min.css';
 import 'font-awesome/css/font-awesome.css';
 import './styles/app.scss';
 
-function App() {
+const App = () => {
   const [token, setToken] = useState();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function App() {
   return (
     <Context>
       <Routes>
-        <Route element={<PrivateRoutes token={token} />}>
+        <Route element={<PrivateRoutes token={token} setToken={setToken} />}>
           <Route element={<LoginSuccess />} path="/login-success" />
           <Route element={<GroupChat />} path="/group-chat" />
           <Route element={<UsersList />} path="/users-list" />
@@ -39,11 +39,11 @@ function App() {
       </Routes>
       <ToastContainer
         position="top-center"
-        autoClose={3000}
+        autoClose={2500}
         closeButton={false}
+        newestOnTop={true}
       />
     </Context>
   );
-}
-
+};
 export default App;

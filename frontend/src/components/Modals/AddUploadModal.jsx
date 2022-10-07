@@ -8,15 +8,14 @@ import { addUpload } from '../../utils/api';
 import "./modal.scss";
 
 const AddUploadModal = (props) => {
-    const { dispatch, loading, fetchAgain, setFetchAgain } = useContext(DataContext);
+    const { loggedUser, dispatch, loading, fetchAgain, setFetchAgain } = useContext(DataContext);
     const [description, setDescription] = useState("");
     const [file, setFile] = useState(null);
-    const { id } = JSON.parse(localStorage.getItem("loggedUser"));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (description.trim() === "") { return toast.warn("Description is required!"); }
-        if (file === null) { return toast.warn("File is required!"); }
+        if (file === null || !file) { return toast.warn("File is required!"); }
 
         dispatch(RequestStart());
 
@@ -24,7 +23,7 @@ const AddUploadModal = (props) => {
         form.append('file', file);
         form.append('label', description.trim());
         form.append('fileName', file.name);
-        form.append('uploaderId', id);
+        form.append('uploaderId', loggedUser.id);
 
         try {
             await addUpload(form);

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button } from "../components";
 import classes from '../styles/error-page.module.scss';
 
-export default function ErrorPage() {
+const ErrorPage = () => {   // Change to arrow function
     return (
         <div className={classes.errorPage}>
             <h1>Oops!</h1>
@@ -15,4 +15,5 @@ export default function ErrorPage() {
             </Link>
         </div>
     );
-}
+};
+export default ErrorPage;

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components';
 import classes from '../styles/welcome.module.scss';
 
-
 const Welcome = () => {
     return (
         <div className={classes.container}>

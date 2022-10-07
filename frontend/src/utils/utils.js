@@ -50,8 +50,6 @@ export const deleteCookie = (cookieName, path, domain) => {
             ((domain) ? ";domain=" + domain : "") +
             ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
     }
-    localStorage.removeItem("loggedUser");
-    window.location.href = "/logout";
 };
 
 export const getCurrentLoggedUser = () => {
@@ -71,5 +69,5 @@ export const getMessageDate = () => {
     time = date[1];
     date = date[0].split('/');  // To turn "/" to "-", we have to split them again; ['9', '9', '2022,']
     year = date[2].split(',');
-    return date = year[0] + '-' + date[1] + '-' + date[0] + ' ' + time;
+    return date = year[0] + '-' + date[1] + '-' + date[0] + ' ' + time; // 2022-9-9 9:49:25
 };
